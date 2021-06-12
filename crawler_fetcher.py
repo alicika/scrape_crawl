@@ -1,6 +1,9 @@
+import time
+
 import requests
 import lxml.html
 import re
+from pymongo import MongoClient
 
 
 def scrape_list_page(res):
@@ -32,6 +35,7 @@ def main():
     res = requests.get('https://gihyo.jp/dp')
     url_set = scrape_list_page(res)
     for u in url_set:
+        time.sleep(1)
         res = session.get(u)
         ebook = scrape_detail_page(res)
         print(ebook)
