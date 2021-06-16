@@ -3,7 +3,7 @@ name: temp
 on: [push, pull_request]
 
 jobs:
-  test:
+  temp:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -20,6 +20,10 @@ jobs:
 
       - run: pipenv run isort --recursive --diff
       - run: pipenv run black --check .
-      - run: pipenv run flake8
+      - run: |
+        # stop the build if there are Python syntax errors or undefined names
+          pipenv run flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          pipenvflake8 . --exit-zero --max-complexity=10 --max-line-length=127
       - run: pipenv run mypy
       - run: pipenv run pytest --cov --cov-fail-under=100
