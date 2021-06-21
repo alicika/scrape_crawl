@@ -20,8 +20,9 @@ jobs:
           pipenv install isort black flake8 mypy pytest
 
       - name: Check test status
-        - run: pipenv run isort --recursive --diff
-        - run: pipenv run black --check .
-        - run: pipenv run flake8
-        - run: pipenv run mypy
-        - run: pipenv run pytest --cov --cov-fail-under=100
+        run: |
+        pipenv run isort --recursive --diff
+        pipenv run black --check .
+        pipenv run flake8
+        pipenv run mypy
+        pipenv run pytest --cov --cov-fail-under=79
