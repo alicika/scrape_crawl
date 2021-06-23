@@ -21,8 +21,8 @@ jobs:
 
       - name: Check test status
         run: |
-        pipenv run isort --recursive --diff
-        pipenv run black --check .
-        pipenv run flake8
-        pipenv run mypy
-        pipenv run pytest --cov --cov-fail-under=79
+          pipenv run isort --recursive --diff
+          pipenv run black --check .
+          pipenv run flake8
+          pipenv run mypy
+          pipenv run pytest --cov --cov-fail-under=79
