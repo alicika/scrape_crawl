@@ -5,11 +5,12 @@ from collections import Counter
 
 import MeCab
 
+
 def iter_docs(file):
 
     for line in file:
         if line.startswith('<doc '):
-            buffer =[]
+            buffer = []
         elif line.startswith('</doc>'):
             content = ''.join(buffer)
             yield content
@@ -32,7 +33,7 @@ def get_tokens(tagger, content):
 
 
 def main():
-    input_dir =sys.argv[1]
+    input_dir = sys.argv[1]
     tagger = MeCab.Tagger('')
     tagger.parse('')
     frequency = Counter()
