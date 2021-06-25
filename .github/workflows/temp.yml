@@ -19,8 +19,9 @@ jobs:
           python -m pip install pipenv
           pipenv install isort black flake8 pytest
 
-      - name: Check test status
+      - name: Check test status with a conditional
         run: |
+          pipenv lock --pre --clear
           pipenv run isort --recursive --diff
           pipenv run black --check --diff .
           pipenv run flake8
