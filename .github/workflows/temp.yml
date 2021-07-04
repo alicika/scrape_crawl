@@ -7,29 +7,28 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        python-version: [ '2.x', '3.x', 'pypy-2.7', 'pypy-3.6', 'pypy-3.7' ]
-      name: Python ${{ matrix.python-version }} temp
+        python-version: [ '3.6', 'pypy-3.6', 'pypy-3.7' ]
+
     steps:
       - uses: actions/checkout@v2
-
       - name: Set up Python
-        uses: actions/setup-python@v2
+      - uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install dependencies with pipenv
+      - name: Install dependencies with pip
         run: |
           python -m pip install --upgrade pip
-          python -m pip install pipenv
-          pipenv install isort black flake8 pytest
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          else
+            pip install isort black flake8 pytest
+          fi
 
       - name: Check test status with a conditional
         run: |
-          pipenv lock --pre --clear
-          pipenv run isort --recursive --diff
-          pipenv run black --check --diff .
-          pipenv run flake8
-          pipenv run pytest --cov --cov-fail-under=79
+          flake8 .
+          pytest --cov --cov-fail-under=79
           if [ "${{ github.event_name }}" = 'release' ]; then
-              pipenv run pytest tests/
+            pytest .
           fi
