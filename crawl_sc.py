@@ -56,8 +56,8 @@ def main():
     q.put(URL)
     q.join()
     print("Done!")
-    print(visited)  # {'.../3/', '.../1/', '.../2/'}
-    print(data)  # { ... new ones added, such as pages 5 and 6 ... }
+    print(visited)
+    print(data)
 
 
 if __name__ == '__main__':
