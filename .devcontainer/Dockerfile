@@ -12,6 +12,10 @@ RUN if [ "${INSTALL_NODE}" = "true" ]; then su vscode -c "umask 0002 && . /usr/l
 RUN pip install requests lxml cssselect pymongo
 RUN --mount=type=secret,id=ssh,target=/root/.ssh/id_rsa
 
+RUN if requirements.txt; \
+        pip3 install -r requirements.txt; \
+    fi \
+
 # [Optional] If your pip requirements rarely change, uncomment this section to add them to the image.
 # COPY requirements.txt /tmp/pip-tmp/
 # RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
