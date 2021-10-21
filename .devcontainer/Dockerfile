@@ -9,12 +9,13 @@ ARG INSTALL_NODE="true"
 ARG NODE_VERSION="lts/*"
 RUN if [ "${INSTALL_NODE}" = "true" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 
-RUN pip install requests lxml cssselect pymongo
+COPY requirements.txt /tmp/
+RUN pip install /tmp/requirements.txt
+COPY . /tmp/
+
+RUN pip3 install requests lxml cssselect pymongo
 RUN --mount=type=secret,id=ssh,target=/root/.ssh/id_rsa
 
-RUN if requirements.txt; \
-        pip3 install -r requirements.txt; \
-    fi \
 
 # [Optional] If your pip requirements rarely change, uncomment this section to add them to the image.
 # COPY requirements.txt /tmp/pip-tmp/
