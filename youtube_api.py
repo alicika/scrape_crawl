@@ -10,6 +10,9 @@ search_response = youtube.search().list(
     type="video",
 ).execute()
 
-# outputs video title
+# outputs video titles
 for item in search_response["items"]:
     print(item["snippet"]["title"])
+
+# $Env="API_KEY_HERE"
+# Get-ChildItem -Path Env:
