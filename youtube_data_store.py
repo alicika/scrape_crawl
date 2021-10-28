@@ -6,7 +6,7 @@ from googleapiclient.discovery import build
 from pymongo import MongoClient, ReplaceOne, DESCENDING
 from pymongo.collection import Collection
 
-YOUTUBE_API_KEY = "AIzaSyCx0TBDRRE_ALey-w6aYNUTXQLo1HPKHds"
+YOUTUBE_API_KEY = os.environ["YOUTUBE_API_KEY"]
 
 logging.getLogger("apiclient.discovery_cache").setLevel(logging.WARNING)
 
