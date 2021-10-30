@@ -22,12 +22,11 @@ jobs:
           if [ -f requirements.txt ]; then
             pip install -r requirements.txt
           else
-            pip install isort black flake8 pytest
+            pip install -y isort black flake8 pytest
           fi
 
       - name: Check test status with a conditional
         run: |
-          flake8 .
           pytest --cov --cov-fail-under=79
           if [ "${{ github.event_name }}" = 'release' ]; then
             pytest .
