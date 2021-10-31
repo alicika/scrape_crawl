@@ -42,6 +42,9 @@ def search_videos(param: str, max_pages: int = 5) -> Iterator[List[dict]]:
 
 
 def save_to_mongodb(collection: Collection, items: List[dict]):
+    """
+    convert and save a searching result to a MongoDB bson file.
+    """
     for item in items:
         item["_id"] = item["id"]
 
@@ -54,6 +57,10 @@ def save_to_mongodb(collection: Collection, items: List[dict]):
 
 
 def show_top_videos(collection: Collection, top: int):
+    """
+    show most popular videos from db.
+    to store videos correctly on the database, avoid using best-videos feature from youtube.videos API.
+    """
     for item in collection.find().sort("statistics.viewCount", DESCENDING).limit(top):
         print(item["statistics"]["viewCount"], item["snippet"]["title"])
 
