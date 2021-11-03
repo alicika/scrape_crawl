@@ -19,7 +19,7 @@ def main():
 
 def parse_year_and_month(year: str, month: str) -> datetime:
     year = int(year[:-1])
-    month = int(month[:-1])。
+    month = int(month[:-1])
     year += (1900 if year >= 63 else 2000)
     return datetime(year, month, 1)
 
